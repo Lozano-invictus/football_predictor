@@ -1,0 +1,29 @@
+2026-05-02 18:26:59,361 - utils - INFO - Iniciando Pipeline ETL Automatico...
+2026-05-02 18:26:59,362 - root - INFO - Saving cached data to C:\Users\ESTEBAN LOZANO\Downloads\football_predictor\FOOTBALL_PREDICTOR_DEFINITIVO\data\soccerdata_cache
+2026-05-02 18:31:53,366 - utils - INFO - 🚀 Iniciando Importación Maestra de Datos Históricos...
+2026-05-02 18:32:23,577 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:32:23,587 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-05-02 18:32:23,591 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-05-02 18:32:23,594 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-05-02 18:32:23,598 - utils - INFO - 🎉 Importación Maestra completada con éxito.
+2026-05-02 18:33:00,531 - utils - INFO - 🚀 Iniciando Importación Maestra de Datos Históricos...
+2026-05-02 18:33:00,537 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:33:00,545 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-05-02 18:33:00,550 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-05-02 18:33:00,555 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-05-02 18:33:00,559 - utils - INFO - 🎉 Importación Maestra completada con éxito.
+2026-05-02 18:33:05,393 - utils - INFO - 🚀 Iniciando Importación Maestra de Datos Históricos...
+2026-05-02 18:33:05,396 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:33:05,403 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-05-02 18:33:05,406 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-05-02 18:33:05,409 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-05-02 18:33:05,413 - utils - INFO - 🎉 Importación Maestra completada con éxito.
+2026-05-02 18:36:58,342 - utils - INFO - 🚀 Iniciando Ingesta Maestra de Datos UCL (2022-2026)...
+2026-05-02 18:36:58,353 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:36:58,370 - utils - ERROR - ❌ Error crítico en ETL Master Pro: (sqlite3.OperationalError) no such column: teams.short_name
+[SQL: SELECT teams.id AS teams_id, teams.name AS teams_name, teams.short_name AS teams_short_name, teams.country AS teams_country, teams.league AS teams_league, teams.logo_url AS teams_logo_url, teams.stadium AS teams_stadium, teams.coach AS teams_coach, teams.ucl_titles AS teams_ucl_titles 
+FROM teams 
+WHERE teams.name = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('AC Milan', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

@@ -1,0 +1,16 @@
+﻿Round,Team_1,Score_1,Score_2,Team_2,Agg,Winner,Venue
+Round of 16,Real Madrid,3,0,Atletico Madrid,5-2,Real Madrid,
+Round of 16,FC Barcelona,4,2,Benfica,6-4,FC Barcelona,
+Round of 16,Arsenal,3,1,PSV Eindhoven,4-1,Arsenal,
+Round of 16,Bayern Munich,3,2,Feyenoord,5-4,Bayern Munich,
+Round of 16,PSG,4,2,Brest,6-3,PSG,
+Round of 16,Atalanta,0,1,Club Brugge,1-2,Club Brugge,
+Round of 16,Inter Milan,2,0,Feyenoord,3-0,Inter Milan,
+Round of 16,Liverpool,4,1,PSV Eindhoven,6-3,Liverpool,
+Quarterfinals,FC Barcelona,3,3,Borussia Dortmund,5-3,FC Barcelona,
+Quarterfinals,Arsenal,3,2,Real Madrid,4-3,Arsenal,
+Quarterfinals,PSG,3,1,Aston Villa,5-2,PSG,
+Quarterfinals,Inter Milan,2,0,Bayern Munich,4-2,Inter Milan,
+Semifinals,FC Barcelona,4,3,Inter Milan,7-6,FC Barcelona,
+Semifinals,PSG,1,0,Arsenal,2-1,PSG,
+Final,FC Barcelona,3,2,PSG,3-2,FC Barcelona,"Allianz Arena, Munich"

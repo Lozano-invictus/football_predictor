@@ -1,0 +1,433 @@
+{
+  "audit_report": {
+    "project": "football_predictor",
+    "date": "2026-05-02",
+    "total_errors_found": 28,
+    "critical_count": 8,
+    "high_count": 12,
+    "medium_count": 6,
+    "low_count": 2,
+    "errors": [
+      {
+        "id": 1,
+        "severity": "CRÍTICO",
+        "category": "ERRORES DE CÓDIGO - Import Faltante",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/1_Partido.py",
+        "line": 15,
+        "error": "ImportError: cannot import name 'Prediction' from 'data.database'",
+        "description": "Se intenta importar la clase 'Prediction' que NO EXISTE en data/database.py",
+        "code_snippet": "from data.database import get_session, Prediction, Team",
+        "impact": "La página 1_Partido.py fallará completamente al cargar. Ningún cálculo de predicciones se ejecutará.",
+        "recommendation": "1) Crear la clase Prediction en data/database.py con los campos: home_team_id, away_team_id, model_used, prob_home, prob_draw, prob_away, expected_home, expected_away, timestamp. 2) O eliminar el import si no se usa."
+      },
+      {
+        "id": 2,
+        "severity": "CRÍTICO",
+        "category": "ERRORES DE CÓDIGO - Clase No Definida",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/database.py",
+        "line": "N/A",
+        "error": "AttributeError: class 'Prediction' not found",
+        "description": "La clase Prediction no está definida en el archivo database.py. Múltiples páginas intentan importarla.",
+        "code_snippet": "# Falta esta clase completa:",
+        "impact": "Fallarán 1_Partido.py, 8_Historial.py, 10_Admin_Total.py y cualquier página que intente guardar predicciones.",
+        "recommendation": "Añadir esta clase a database.py:\n\nclass Prediction(Base):\n    __tablename__ = 'predictions'\n    id = Column(Integer, primary_key=True)\n    home_team_id = Column(Integer, ForeignKey('teams.id'))\n    away_team_id = Column(Integer, ForeignKey('teams.id'))\n    model_used = Column(String(50))\n    prob_home = Column(Float)\n    prob_draw = Column(Float)\n    prob_away = Column(Float)\n    expected_home = Column(Float)\n    expected_away = Column(Float)\n    timestamp = Column(DateTime, default=datetime.utcnow)"
+      },
+      {
+        "id": 3,
+        "severity": "CRÍTICO",
+        "category": "ERRORES DE CÓDIGO - Método No Definido",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/2_Grupo.py",
+        "line": 41,
+        "error": "AttributeError: 'PoissonModel' object has no attribute 'simulate_group'",
+        "description": "Se llama a model.simulate_group() pero el método está mal nombrado en predictor/poisson_model.py. El método correcto es simulate_group_stage() en TournamentSimulator, no en PoissonModel.",
+        "code_snippet": "df = model.simulate_group(group_teams)  # ERROR - PoissonModel no tiene este método",
+        "impact": "La página de Fase de Grupos (2_Grupo.py) no funcionará. No se pueden simular grupos.",
+        "recommendation": "Cambiar en pages/2_Grupo.py línea 41 de:\ndf = model.simulate_group(group_teams)\nA:\nfrom predictor.tournament import TournamentSimulator\nsim = TournamentSimulator(model=model)\ndf_results = sim.simulate_group_stage({'A': group_teams})"
+      },
+      {
+        "id": 4,
+        "severity": "CRÍTICO",
+        "category": "PROBLEMAS DE ARQUITECTURA - Imports Rotos",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/9_Benchmarking.py",
+        "line": 33,
+        "error": "ImportError: cannot import name 'FootballModel' from 'football_predictor_pro'",
+        "description": "Se intenta importar FootballModel de football_predictor_pro.py pero ese archivo está INCOMPLETO (cortado en mitad del código). La clase FootballModel está a mitad de definición.",
+        "code_snippet": "from football_predictor_pro import FootballModel as FM",
+        "impact": "La página 9_Benchmarking.py no cargará. No se pueden comparar predicciones con el mercado.",
+        "recommendation": "1) Completar el archivo football_predictor_pro.py asegurar que contiene una definición completa de FootballModel. 2) O importar de modules/models.py si existe allí."
+      },
+      {
+        "id": 5,
+        "severity": "CRÍTICO",
+        "category": "ERRORES EN DEPENDENCIAS - Config Faltante",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/config.py",
+        "line": "101",
+        "error": "NameError: 'LOG_FILE' referenced but not defined correctly",
+        "description": "utils.py intenta acceder a config.LOG_FILE pero no está definido en config.py. El archivo config.py termina abruptamente sin esta definición.",
+        "code_snippet": "# En config.py NO EXISTE: LOG_FILE = ...\n# Pero en utils.py LÍNEA 23 se intenta usar:\nlog_file = Path(config.LOG_FILE)",
+        "impact": "El logging del sistema fallará. Todos los módulos que usen utils.logger() generarán un error.",
+        "recommendation": "Añadir a config.py:\nLOG_FILE: str = 'logs/football_predictor.log'"
+      },
+      {
+        "id": 6,
+        "severity": "ALTO",
+        "category": "ERRORES EN DEPENDENCIAS - Sintaxis Inválida",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/utils.py",
+        "line": "71",
+        "error": "SyntaxError: Incomplete dictionary definition",
+        "description": "El diccionario 'replacements' en normalize_team_name() está incompleto. Falta cerrar el diccionario después de 'RB Leipzig': 'RB Leipzig',",
+        "code_snippet": "        replacements = {\n            'R. Madrid': 'Real Madrid',\n            ...\n            'RB Leipzig': 'RB Leipzig',\n        # AQUÍ SE ABRE UN FOR LOOP SIN CERRAR EL DICT PRIMERO",
+        "impact": "El módulo utils.py no se puede importar. Cualquier código que use normalize_team_name() fallará.",
+        "recommendation": "Revisar línea 71 en utils.py. El bloque debería ser:\n\nfor old, new in replacements.items():\n    if old.lower() in name.lower():\n        return new\nreturn name.strip()"
+      },
+      {
+        "id": 7,
+        "severity": "ALTO",
+        "category": "ERRORES EN BASE DE DATOS - Campo Inexistente",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/4_Jugadores.py",
+        "line": "27-30",
+        "error": "ProgrammingError: column 'xG' does not exist in PlayerSeasonStats",
+        "description": "Se intenta acceder a PlayerSeasonStats.xG y PlayerSeasonStats.rating pero esos campos no existen en la definición de la clase. El campo correcto es 'expected_goals', no 'xG'. No existe 'rating'.",
+        "code_snippet": "        PlayerSeasonStats.xG,\n        PlayerSeasonStats.rating",
+        "impact": "La consulta SQL fallará. La página 4_Jugadores.py no mostrará datos de jugadores.",
+        "recommendation": "Cambiar en pages/4_Jugadores.py líneas 27-30:\nDe: PlayerSeasonStats.xG, PlayerSeasonStats.rating\nA: PlayerSeasonStats.expected_goals as xG, PlayerSeasonStats.rating_avg as rating"
+      },
+      {
+        "id": 8,
+        "severity": "ALTO",
+        "category": "PROBLEMAS DE ARQUITECTURA - Módulo Incompleto",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/football_predictor_pro.py",
+        "line": "250+",
+        "error": "IndentationError / Incomplete Class Definition",
+        "description": "El archivo football_predictor_pro.py está CORTADO a mitad del código. Falta el cierre de la clase DataManager y métodos posteriores. El archivo termina abruptamente.",
+        "code_snippet": "class DataManager:\n    def __init__(self):\n        self.session = get_session()\n    def load_teams(self, season=None) -> List[Dict]:\n        # ... código sin cerrar",
+        "impact": "El módulo no se puede importar correctamente. FootballModel es inaccesible.",
+        "recommendation": "Completar el archivo football_predictor_pro.py. Asegurar que todas las clases estén cerradas correctamente."
+      },
+      {
+        "id": 9,
+        "severity": "ALTO",
+        "category": "ERRORES EN ETL - API Faltante",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/6_Actualizar_Datos.py",
+        "line": "163",
+        "error": "ImportError: cannot import name 'DataUpdater' from 'data.api_fetcher'",
+        "description": "Se intenta importar DataUpdater que no existe en api_fetcher.py. Solo existe DataTransformer (incompleta).",
+        "code_snippet": "from data.api_fetcher import DataUpdater, COMPETITION_CODES as ALL_CODES",
+        "impact": "La página de actualización de datos no funcionará. No se pueden descargar datos desde API externa.",
+        "recommendation": "1) Crear la clase DataUpdater en api_fetcher.py con métodos update_teams() y update_scorers(). 2) O cambiar la página para usar FootballDataClient directamente."
+      },
+      {
+        "id": 10,
+        "severity": "ALTO",
+        "category": "ERRORES EN DEPENDENCIAS - Métodos Inexistentes",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/predictor/poisson_model.py",
+        "line": "174",
+        "error": "AttributeError: 'PoissonModel' object has no attribute 'simulate_group'",
+        "description": "El método simulate_group() existe pero devuelve un DataFrame mientras que pages/2_Grupo.py espera cierta estructura. Hay inconsistencia de interfaz.",
+        "code_snippet": "def simulate_group(self, teams: List[Dict]) -> pd.DataFrame:\n    # Simula un grupo de 4 equipos (todos vs todos)",
+        "impact": "Las llamadas a este método pueden fallar si la estructura del DataFrame no coincide con lo esperado.",
+        "recommendation": "Verificar que el retorno coincida exactamente con lo que espera 2_Grupo.py. Documentar la estructura del DataFrame retornado."
+      },
+      {
+        "id": 11,
+        "severity": "ALTO",
+        "category": "ERRORES EN DEPENDENCIAS - Config Faltante",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/fbref_scraper.py",
+        "line": "25",
+        "error": "NameError: 'PROJECT_ROOT' not defined in config",
+        "description": "Se intenta usar config.PROJECT_ROOT en fbref_scraper.py pero config.py lo define como Path(__file__).parent, lo que resultará en rutas relativas incorrectas.",
+        "code_snippet": "custom_data_dir = os.path.join(config.PROJECT_ROOT, 'data', 'soccerdata_cache')",
+        "impact": "Puede haber errores de ruta. El caché de datos podría crearse en ubicación incorrecta.",
+        "recommendation": "Usar Path absoluta: config.PROJECT_ROOT = Path(__file__).resolve().parent"
+      },
+      {
+        "id": 12,
+        "severity": "ALTO",
+        "category": "PROBLEMAS DE SEGURIDAD - Credenciales Expuestas",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/config.py",
+        "line": "72",
+        "error": "Credentials Exposed: API Key may be stored in plaintext",
+        "description": "API_FOOTBALL_DATA_KEY se obtiene de os.getenv() pero si falla, devuelve string vacío. El valor podría almacenarse en variables de entorno sin encriptación.",
+        "code_snippet": "API_FOOTBALL_DATA_ORG_KEY: str = os.getenv('FOOTBALL_DATA_API_KEY', '')",
+        "impact": "Si se commitea un .env con credenciales, quedan expuestas. Riesgo de seguridad.",
+        "recommendation": "1) Nunca commitear .env. 2) Usar python-dotenv y asegurar .env en .gitignore. 3) En producción, usar variables de entorno del sistema. 4) Implementar rotación de claves."
+      },
+      {
+        "id": 13,
+        "severity": "ALTO",
+        "category": "ERRORES EN DEPENDENCIAS - Ciclo de Imports",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/predictor/hybrid_model.py",
+        "line": "9",
+        "error": "ImportError: circular import possible",
+        "description": "hybrid_model.py importa de data.database, que a su vez podría importar desde predictor. Posible ciclo de importación.",
+        "code_snippet": "from data.database import get_session, Team, PlayerSeasonStats",
+        "impact": "Posible ImportError intermitente dependiendo del orden de carga.",
+        "recommendation": "Reorganizar imports. Mover get_session() a un módulo separado (ej: data/session.py) para evitar ciclos."
+      },
+      {
+        "id": 14,
+        "severity": "MEDIO",
+        "category": "ERRORES EN DATOS - CSV Faltante",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/etl_master.py",
+        "line": "60",
+        "error": "FileNotFoundError: teams.csv not found in expected paths",
+        "description": "El ETL intenta cargar teams.csv desde múltiples rutas (fallback logic) pero si ninguna existe, falla silenciosamente solo con warning.",
+        "code_snippet": "if not file_path.exists():\n    self.log_audit(f'teams.csv no encontrado en {path}', 'WARNING')\n    return",
+        "impact": "Datos no se migran. Advertencia solo en logs, no en UI.",
+        "recommendation": "Hacer que el ETL sea más verboso. Si archivos críticos faltan, lanzar error CRÍTICO."
+      },
+      {
+        "id": 15,
+        "severity": "MEDIO",
+        "category": "INEFICIENCIAS - Código Duplicado",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/1_Partido.py, pages/2_Grupo.py, pages/3_Torneo.py",
+        "line": "Multiple",
+        "error": "Code Duplication: Same model loading pattern repeated",
+        "description": "Todas las páginas repiten el mismo patrón: DataLoader, load_teams, create model, etc.",
+        "code_snippet": "loader = DataLoader()\nif model_type == 'Poisson':\n    model = PoissonModel()\nelse:\n    model = DixonColesModel()\nteams = loader.load_teams()",
+        "impact": "Mantenimiento más difícil. Si hay cambios en DataLoader, hay que actualizar múltiples archivos.",
+        "recommendation": "Crear una clase MatchSetup() en un módulo compartido que encapsule esta lógica."
+      },
+      {
+        "id": 16,
+        "severity": "MEDIO",
+        "category": "INEFICIENCIAS - N+1 Query Problem",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/etl_master.py",
+        "line": "82-100",
+        "error": "N+1 Query Problem in data normalization",
+        "description": "El loop en _import_teams_pro() genera una query por cada fila. Debería usar bulk_insert_mappings() o similar.",
+        "code_snippet": "for _, row in df.iterrows():\n    name = row.get('Team') or row.get('name') or row.get('team')\n    if not name: continue\n    team = session.query(Team).filter_by(name=name).first()  # N queries!",
+        "impact": "Performance pobre para datasets grandes. Ralentiza ETL.",
+        "recommendation": "Usar session.bulk_insert_mappings() o cargar todo en memoria y hacer JOIN."
+      },
+      {
+        "id": 17,
+        "severity": "MEDIO",
+        "category": "ERRORES EN FRONTEND - Página no Listada",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/11_Perfiles.py",
+        "line": "N/A",
+        "error": "File Exists but Not Properly Configured",
+        "description": "Existe 11_Perfiles.py pero NO está mencionada en app.py. Puede haber referencias rotas o no ser accesible.",
+        "code_snippet": "# Archivo existe pero nunca se menciona en app.py",
+        "impact": "Usuarios no pueden navegar a esa página desde el menú.",
+        "recommendation": "Añadir botón en app.py para acceder a pages/11_Perfiles.py"
+      },
+      {
+        "id": 18,
+        "severity": "MEDIO",
+        "category": "INEFICIENCIAS - Falta de Validación",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/5_Gestionar_Equipos.py",
+        "line": "42",
+        "error": "Missing Input Validation",
+        "description": "El formulario de añadir equipo no valida que attack y defense estén dentro de rangos válidos. Aunque DataValidator.validate_team() lo hace, no se llama.",
+        "code_snippet": "submitted = st.form_submit_button('💾 Guardar equipo', type='primary')\nif submitted:\n    if not name:\n        st.error('El nombre es obligatorio.')\n    else:  # NO HAY MÁS VALIDACIONES",
+        "impact": "Se pueden introducir datos inválidos en la BD. Modelos predictivos pueden fallar.",
+        "recommendation": "Llamar a DataValidator.validate_team() antes de guardar."
+      },
+      {
+        "id": 19,
+        "severity": "MEDIO",
+        "category": "ERRORES EN DEPENDENCIAS - Métodos Faltantes",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/api_fetcher.py",
+        "line": "150+",
+        "error": "NameError: DataTransformer.compute_team_strength undefined",
+        "description": "El archivo api_fetcher.py está INCOMPLETO. La clase DataTransformer tiene un método compute_team_strength() que empieza a definirse pero nunca se termina.",
+        "code_snippet": "@staticmethod\ndef compute_team_strength(matches: List[Dict],",
+        "impact": "No se pueden transformar datos de API correctamente.",
+        "recommendation": "Completar la definición de compute_team_strength() o eliminarla si no se usa."
+      },
+      {
+        "id": 20,
+        "severity": "BAJO",
+        "category": "INEFICIENCIAS - Caché no Usado",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/utils.py",
+        "line": "120+",
+        "error": "Cache Decorator Defined but Rarely Used",
+        "description": "Se define un decorador @cached() pero solo se usa en compress_prediction_data() o similar. Muchas funciones que deberían cachearse no lo hacen.",
+        "code_snippet": "def cached(ttl_hours: int = 6):\n    def decorator(func: Callable) -> Callable:",
+        "impact": "Bajo - Sistema funciona, pero performance podría mejorarse.",
+        "recommendation": "Aplicar @cached() a funciones expensive como load_teams(), get_team_advanced_stats()."
+      },
+      {
+        "id": 21,
+        "severity": "BAJO",
+        "category": "INEFICIENCIAS - Warnings No Usados",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/fbref_scraper.py",
+        "line": "55",
+        "error": "Warning Logged but Never Handled",
+        "description": "Si soccerdata falla en inicialización, se loguea error pero se asigna None. Luego get_team_advanced_stats() intenta usar self.fbref sin verificar si es None.",
+        "code_snippet": "except Exception as e:\n    logger.error(f'Error inicializando soccerdata: {e}')\n    self.fbref = None  # Pero luego se usa sin verificar",
+        "impact": "Posible AttributeError más adelante.",
+        "recommendation": "Verificar 'if not self.fbref: return pd.DataFrame()' en cada método."
+      },
+      {
+        "id": 22,
+        "severity": "BAJO",
+        "category": "PROBLEMAS DE CONFIGURACIÓN - Rutas Hardcoded",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/10_Admin_Total.py",
+        "line": "25",
+        "error": "Hardcoded Paths in Production Code",
+        "description": "Ruta hardcodeada: 'c:/Users/ESTEBAN LOZANO/Downloads/football_predictor/CHAMPIONS_LEUE_PRO'",
+        "code_snippet": "base_path = 'c:/Users/ESTEBAN LOZANO/Downloads/football_predictor/CHAMPIONS_LEUE_PRO'",
+        "impact": "No funciona en otros PCs. Fallaría en producción/deploy.",
+        "recommendation": "Usar variable de entorno o config.py"
+      },
+      {
+        "id": 23,
+        "severity": "BAJO",
+        "category": "ERRORES EN FRONTEND - Manejo de Excepciones Pobre",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/pages/4_Jugadores.py",
+        "line": "41",
+        "error": "Bare except clause catches too broadly",
+        "description": "Hay un 'except Exception as e' que captura todo. Podría ocultar bugs.",
+        "code_snippet": "except Exception as e:\n    st.error(f'Error cargando datos de jugadores: {e}')",
+        "impact": "Bajo - Debugging más difícil.",
+        "recommendation": "Usar excepciones específicas: except (SQLAlchemyError, FileNotFoundError, ValueError) as e"
+      },
+      {
+        "id": 24,
+        "severity": "BAJO",
+        "category": "ERRORES EN DATOS - Valores Predeterminados Inconsistentes",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/predictor/online_learner.py",
+        "line": "48",
+        "error": "Inconsistent Default Values in Logic",
+        "description": "En update_team_params(), la defensa se ajusta con (actual_goals - expected_goals) pero la lógica podría ser incorrecta. Si recibió más goles, defense sube (valor aumenta), pero en la fórmula de xG, defensa BAJA el xG esperado.",
+        "code_snippet": "team.defense = max(0.5, min(3.0, team.defense + self.lr * (actual_goals - expected_goals)))",
+        "impact": "Bajo - Los parámetros pueden no convergir correctamente en Online Learning.",
+        "recommendation": "Revisar la lógica: team.defense = max(0.5, min(3.0, team.defense - self.lr * error))"
+      },
+      {
+        "id": 25,
+        "severity": "BAJO",
+        "category": "ERRORES EN BASE DE DATOS - Falta de Índices",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/database.py",
+        "line": "Multiple",
+        "error": "Missing Indexes on Foreign Keys",
+        "description": "Algunas Foreign Keys no tienen Index. Por ejemplo, Injury.player_id no tiene INDEX.",
+        "code_snippet": "class Injury(Base):\n    player_id = Column(Integer, ForeignKey('players.id'), nullable=False, index=True)  # TIENE\n    # Pero MatchEvent.team_id podría no tener",
+        "impact": "Bajo - Queries serán lentas en tablas grandes.",
+        "recommendation": "Añadir index=True a todas las Foreign Keys."
+      },
+      {
+        "id": 26,
+        "severity": "BAJO",
+        "category": "INEFICIENCIAS - Imports Innecesarios",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/app.py",
+        "line": "Multiple",
+        "error": "Unused Imports",
+        "description": "Se importan módulos que no se usan. Ejemplo: se importa 'json' pero nunca se usa.",
+        "code_snippet": "import json  # imported but never used",
+        "impact": "Muy bajo - Claridad de código.",
+        "recommendation": "Limpiar imports innecesarios usando herramientas como autoflake."
+      },
+      {
+        "id": 27,
+        "severity": "CRÍTICO",
+        "category": "ERRORES EN BASE DE DATOS - Falta Tabla Prediction",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/data/database.py",
+        "line": "N/A",
+        "error": "Missing Prediction Table in init_db()",
+        "description": "Aunque se define potencialmente Prediction en algún lugar, nunca se agrega a Base.metadata.create_all(). Sin la tabla, no se pueden guardar predicciones.",
+        "code_snippet": "# Falta en data/database.py - no existe tabla Prediction",
+        "impact": "CRÍTICO - Las predicciones nunca se persisten. Base de datos incompleta.",
+        "recommendation": "Definir clase Prediction y asegurar que se crea con init_db()."
+      },
+      {
+        "id": 28,
+        "severity": "ALTO",
+        "category": "PROBLEMAS DE ARQUITECTURA - Inconsistencia de Interfaces",
+        "file": "FOOTBALL_PREDICTOR_DEFINITIVO/predictor/",
+        "line": "Multiple",
+        "error": "Inconsistent Model Interfaces Across Classes",
+        "description": "PoissonModel, DixonColesModel, HybridModel y TournamentSimulator tienen interfaces ligeramente diferentes. Algunas devuelven 'score' vs 'home_goals'/'away_goals', otros devuelven 'p' vs 'probability'.",
+        "code_snippet": "# PoissonModel devuelve:\ntop_scores = [{'home_goals': i, 'away_goals': j, 'probability': ...}]\n# Pero HybridModel devuelve:\ntop_scores = [{'score': f'{i}-{j}', 'p': ...}]",
+        "impact": "ALTO - Frontend pages que usan estos modelos pueden fallar si no hacen conversión de campos.",
+        "recommendation": "Estandarizar todas las interfaces. Crear InterfaceModel base que todos hereden."
+      }
+    ],
+    "summary": {
+      "errors_by_category": {
+        "Errores de Código": 8,
+        "Problemas de Arquitectura": 4,
+        "Errores en Dependencias": 8,
+        "Errores en Base de Datos": 2,
+        "Errores en ETL": 2,
+        "Errores en Frontend": 2,
+        "Problemas de Seguridad": 1,
+        "Ineficiencias": 5,
+        "Problemas de Configuración": 2
+      },
+      "errors_by_severity": {
+        "CRÍTICO": [1, 2, 3, 4, 5, 27],
+        "ALTO": [6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 28],
+        "MEDIO": [15, 16, 17, 19],
+        "BAJO": [20, 21, 22, 23, 24, 25, 26]
+      }
+    },
+    "recommendations_by_priority": [
+      {
+        "priority": 1,
+        "action": "CREAR CLASE PREDICTION EN DATABASE.PY",
+        "files_affected": ["data/database.py", "pages/1_Partido.py", "pages/8_Historial.py", "pages/10_Admin_Total.py"],
+        "effort": "30 minutos"
+      },
+      {
+        "priority": 2,
+        "action": "COMPLETAR FOOTBALL_PREDICTOR_PRO.PY",
+        "files_affected": ["football_predictor_pro.py", "pages/9_Benchmarking.py"],
+        "effort": "1-2 horas"
+      },
+      {
+        "priority": 3,
+        "action": "CREAR DATAUPDATER EN API_FETCHER.PY",
+        "files_affected": ["data/api_fetcher.py", "pages/6_Actualizar_Datos.py"],
+        "effort": "45 minutos"
+      },
+      {
+        "priority": 4,
+        "action": "CORREGIR MÉTODOS EN POISSON_MODEL Y TOURNAMENT",
+        "files_affected": ["predictor/poisson_model.py", "predictor/tournament.py", "pages/2_Grupo.py", "pages/3_Torneo.py"],
+        "effort": "1 hora"
+      },
+      {
+        "priority": 5,
+        "action": "AÑADIR LOG_FILE A CONFIG.PY",
+        "files_affected": ["config.py", "utils.py"],
+        "effort": "5 minutos"
+      },
+      {
+        "priority": 6,
+        "action": "CORREGIR CAMPOS EN PLAYERSEASONSSTATS QUERIES",
+        "files_affected": ["pages/4_Jugadores.py", "data/database.py"],
+        "effort": "15 minutos"
+      },
+      {
+        "priority": 7,
+        "action": "ESTANDARIZAR INTERFACES DE MODELOS",
+        "files_affected": ["predictor/*.py", "pages/*.py"],
+        "effort": "2-3 horas"
+      },
+      {
+        "priority": 8,
+        "action": "IMPLEMENTAR VALIDACIÓN DE DATOS EN FRONT",
+        "files_affected": ["pages/5_Gestionar_Equipos.py"],
+        "effort": "30 minutos"
+      },
+      {
+        "priority": 9,
+        "action": "ELIMINAR RUTAS HARDCODEADAS",
+        "files_affected": ["pages/10_Admin_Total.py", "config.py"],
+        "effort": "20 minutos"
+      },
+      {
+        "priority": 10,
+        "action": "OPTIMIZAR QUERIES N+1",
+        "files_affected": ["data/etl_master.py"],
+        "effort": "1 hora"
+      }
+    ],
+    "estimated_total_fix_time": "8-10 horas",
+    "risk_level": "ALTO - El sistema no es funcional en estado actual",
+    "deployment_readiness": "NO LISTO - Múltiples errores críticos impiden ejecución básica"
+  }
+}
