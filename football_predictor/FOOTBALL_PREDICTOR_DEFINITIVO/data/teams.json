@@ -1,0 +1,283 @@
+{
+  "metadata": {
+    "source": "UEFA Champions League 2022-2024 / ligas domésticas",
+    "last_updated": "2024-12",
+    "fields": {
+      "attack": "media de goles anotados por partido",
+      "defense": "media de goles encajados por partido",
+      "rank": "posición en ranking histórico UCL"
+    }
+  },
+  "teams": [
+    {
+      "name": "Manchester City",
+      "country": "ENG",
+      "league": "Premier League",
+      "attack": 2.3,
+      "defense": 0.9,
+      "ucl_titles": 1,
+      "rank": 30,
+      "avg_distance": 117.41,
+      "avg_possession": 50.0,
+      "last_updated": "2026-05-02"
+    },
+    {
+      "name": "Arsenal",
+      "country": "ENG",
+      "league": "Premier League",
+      "attack": 2.0,
+      "defense": 0.9,
+      "ucl_titles": 0,
+      "rank": 55,
+      "avg_distance": 117.41,
+      "avg_possession": 50.0,
+      "last_updated": "2026-05-02"
+    },
+    {
+      "name": "Liverpool",
+      "country": "ENG",
+      "league": "Premier League",
+      "attack": 2.5,
+      "defense": 1.1,
+      "ucl_titles": 6,
+      "rank": 6,
+      "avg_distance": 117.41,
+      "avg_possession": 50.0,
+      "last_updated": "2026-05-02"
+    },
+    {
+      "name": "Chelsea",
+      "country": "ENG",
+      "league": "Premier League",
+      "attack": 1.8,
+      "defense": 1.2,
+      "ucl_titles": 2,
+      "rank": 12,
+      "avg_distance": 117.41,
+      "avg_possession": 50.0,
+      "last_updated": "2026-05-02"
+    },
+    {
+      "name": "Tottenham Hotspur",
+      "country": "ENG",
+      "league": "Premier League",
+      "attack": 1.8,
+      "defense": 1.3,
+      "ucl_titles": 0,
+      "rank": 64,
+      "avg_distance": 117.41,
+      "avg_possession": 50.0,
+      "last_updated": "2026-05-02"
+    },
+    {
+      "name": "Aston Villa",
+      "country": "ENG",
+      "league": "Premier League",
+      "attack": 1.9,
+      "defense": 1.1,
+      "ucl_titles": 1,
+      "rank": 90,
+      "avg_distance": 117.41,
+      "avg_possession": 50.0,
+      "last_updated": "2026-05-02"
+    },
+    {
+      "name": "Real Madrid",
+      "country": "ESP",
+      "league": "La Liga",
+      "attack": 2.1,
+      "defense": 0.8,
+      "ucl_titles": 15,
+      "rank": 1
+    },
+    {
+      "name": "Barcelona",
+      "country": "ESP",
+      "league": "La Liga",
+      "attack": 2.3,
+      "defense": 1.2,
+      "ucl_titles": 5,
+      "rank": 3
+    },
+    {
+      "name": "Atlético Madrid",
+      "country": "ESP",
+      "league": "La Liga",
+      "attack": 1.6,
+      "defense": 0.9,
+      "ucl_titles": 0,
+      "rank": 16
+    },
+    {
+      "name": "Sevilla",
+      "country": "ESP",
+      "league": "La Liga",
+      "attack": 1.5,
+      "defense": 1.1,
+      "ucl_titles": 0,
+      "rank": 58
+    },
+    {
+      "name": "Bayern Munich",
+      "country": "GER",
+      "league": "Bundesliga",
+      "attack": 2.4,
+      "defense": 1.0,
+      "ucl_titles": 6,
+      "rank": 2
+    },
+    {
+      "name": "Borussia Dortmund",
+      "country": "GER",
+      "league": "Bundesliga",
+      "attack": 2.0,
+      "defense": 1.3,
+      "ucl_titles": 1,
+      "rank": 17
+    },
+    {
+      "name": "Bayer Leverkusen",
+      "country": "GER",
+      "league": "Bundesliga",
+      "attack": 2.2,
+      "defense": 0.9,
+      "ucl_titles": 0,
+      "rank": 37
+    },
+    {
+      "name": "RB Leipzig",
+      "country": "GER",
+      "league": "Bundesliga",
+      "attack": 2.0,
+      "defense": 1.1,
+      "ucl_titles": 0,
+      "rank": 95
+    },
+    {
+      "name": "Inter Milan",
+      "country": "ITA",
+      "league": "Serie A",
+      "attack": 1.8,
+      "defense": 0.8,
+      "ucl_titles": 3,
+      "rank": 15
+    },
+    {
+      "name": "AC Milan",
+      "country": "ITA",
+      "league": "Serie A",
+      "attack": 1.7,
+      "defense": 1.0,
+      "ucl_titles": 7,
+      "rank": 7
+    },
+    {
+      "name": "Juventus",
+      "country": "ITA",
+      "league": "Serie A",
+      "attack": 1.5,
+      "defense": 0.9,
+      "ucl_titles": 2,
+      "rank": 5
+    },
+    {
+      "name": "Napoli",
+      "country": "ITA",
+      "league": "Serie A",
+      "attack": 1.9,
+      "defense": 1.1,
+      "ucl_titles": 0,
+      "rank": 63
+    },
+    {
+      "name": "PSG",
+      "country": "FRA",
+      "league": "Ligue 1",
+      "attack": 2.2,
+      "defense": 1.1,
+      "ucl_titles": 0,
+      "rank": 20
+    },
+    {
+      "name": "Marseille",
+      "country": "FRA",
+      "league": "Ligue 1",
+      "attack": 1.6,
+      "defense": 1.2,
+      "ucl_titles": 1,
+      "rank": 38
+    },
+    {
+      "name": "Porto",
+      "country": "POR",
+      "league": "Primeira Liga",
+      "attack": 1.8,
+      "defense": 1.1,
+      "ucl_titles": 2,
+      "rank": 9
+    },
+    {
+      "name": "Benfica",
+      "country": "POR",
+      "league": "Primeira Liga",
+      "attack": 2.0,
+      "defense": 1.2,
+      "ucl_titles": 2,
+      "rank": 8
+    },
+    {
+      "name": "Sporting CP",
+      "country": "POR",
+      "league": "Primeira Liga",
+      "attack": 1.7,
+      "defense": 1.0,
+      "ucl_titles": 0,
+      "rank": 53
+    },
+    {
+      "name": "Ajax",
+      "country": "NED",
+      "league": "Eredivisie",
+      "attack": 1.9,
+      "defense": 1.2,
+      "ucl_titles": 4,
+      "rank": 10
+    },
+    {
+      "name": "Club Brugge",
+      "country": "BEL",
+      "league": "Pro League",
+      "attack": 1.5,
+      "defense": 1.3,
+      "ucl_titles": 0,
+      "rank": 36
+    },
+    {
+      "name": "Salzburgo",
+      "country": "AUT",
+      "league": "Bundesliga AUT",
+      "attack": 1.7,
+      "defense": 1.2,
+      "ucl_titles": 0,
+      "rank": 45
+    },
+    {
+      "name": "Celtic",
+      "country": "SCO",
+      "league": "Premiership",
+      "attack": 1.6,
+      "defense": 1.2,
+      "ucl_titles": 1,
+      "rank": 14
+    },
+    {
+      "name": "Shakhtar Donetsk",
+      "country": "UKR",
+      "league": "Premier League UA",
+      "attack": 1.5,
+      "defense": 1.1,
+      "ucl_titles": 0,
+      "rank": 27
+    }
+  ]
+}

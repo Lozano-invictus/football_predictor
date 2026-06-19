@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "source": "UEFA Champions League 2021-2022 Player Stats",
+    "fields": {
+      "goals": "goles anotados en la edición",
+      "shots_attempted": "disparos totales",
+      "shots_on_target": "disparos a puerta",
+      "matches_played": "partidos jugados",
+      "assists": "asistencias",
+      "position": "striker | midfielder | defender | goalkeeper"
+    }
+  },
+  "players": [
+    {"name": "Karim Benzema",    "team": "Real Madrid",       "position": "striker",    "matches_played": 12, "goals": 15, "shots_attempted": 45, "shots_on_target": 23, "assists": 2},
+    {"name": "Robert Lewandowski","team":"Barcelona",         "position": "striker",    "matches_played": 10, "goals": 13, "shots_attempted": 42, "shots_on_target": 22, "assists": 3},
+    {"name": "Sebastien Haller", "team": "Borussia Dortmund", "position": "striker",    "matches_played": 9,  "goals": 11, "shots_attempted": 33, "shots_on_target": 18, "assists": 1},
+    {"name": "Mohamed Salah",    "team": "Liverpool",         "position": "striker",    "matches_played": 13, "goals": 8,  "shots_attempted": 36, "shots_on_target": 20, "assists": 4},
+    {"name": "Riyad Mahrez",     "team": "Manchester City",   "position": "midfielder", "matches_played": 11, "goals": 7,  "shots_attempted": 22, "shots_on_target": 11, "assists": 2},
+    {"name": "Christopher Nkunku","team":"RB Leipzig",        "position": "midfielder", "matches_played": 10, "goals": 7,  "shots_attempted": 28, "shots_on_target": 14, "assists": 5},
+    {"name": "Kylian Mbappé",    "team": "PSG",               "position": "striker",    "matches_played": 8,  "goals": 6,  "shots_attempted": 25, "shots_on_target": 13, "assists": 2},
+    {"name": "Darwin Núñez",     "team": "Benfica",           "position": "striker",    "matches_played": 10, "goals": 6,  "shots_attempted": 24, "shots_on_target": 12, "assists": 1},
+    {"name": "Leroy Sane",       "team": "Bayern Munich",     "position": "midfielder", "matches_played": 11, "goals": 6,  "shots_attempted": 26, "shots_on_target": 14, "assists": 3},
+    {"name": "Roberto Firmino",  "team": "Liverpool",         "position": "striker",    "matches_played": 12, "goals": 5,  "shots_attempted": 18, "shots_on_target": 9,  "assists": 4},
+    {"name": "Sadio Mané",       "team": "Bayern Munich",     "position": "striker",    "matches_played": 12, "goals": 5,  "shots_attempted": 22, "shots_on_target": 12, "assists": 2},
+    {"name": "Rodrygo",          "team": "Real Madrid",       "position": "midfielder", "matches_played": 12, "goals": 5,  "shots_attempted": 20, "shots_on_target": 10, "assists": 3},
+    {"name": "Lionel Messi",     "team": "PSG",               "position": "midfielder", "matches_played": 8,  "goals": 5,  "shots_attempted": 24, "shots_on_target": 11, "assists": 6},
+    {"name": "Gabriel Jesus",    "team": "Arsenal",           "position": "striker",    "matches_played": 10, "goals": 4,  "shots_attempted": 19, "shots_on_target": 10, "assists": 3},
+    {"name": "Timo Werner",      "team": "RB Leipzig",        "position": "striker",    "matches_played": 9,  "goals": 4,  "shots_attempted": 17, "shots_on_target": 8,  "assists": 2},
+    {"name": "Luis Díaz",        "team": "Liverpool",         "position": "midfielder", "matches_played": 12, "goals": 4,  "shots_attempted": 21, "shots_on_target": 10, "assists": 3},
+    {"name": "Vinícius Júnior",  "team": "Real Madrid",       "position": "midfielder", "matches_played": 13, "goals": 4,  "shots_attempted": 23, "shots_on_target": 11, "assists": 5},
+    {"name": "Thomas Müller",    "team": "Bayern Munich",     "position": "midfielder", "matches_played": 11, "goals": 4,  "shots_attempted": 16, "shots_on_target": 8,  "assists": 7},
+    {"name": "Antoine Griezmann","team": "Atlético Madrid",   "position": "striker",    "matches_played": 9,  "goals": 4,  "shots_attempted": 20, "shots_on_target": 9,  "assists": 2},
+    {"name": "Erling Haaland",   "team": "Manchester City",   "position": "striker",    "matches_played": 11, "goals": 10, "shots_attempted": 32, "shots_on_target": 18, "assists": 1}
+  ],
+  "goalkeepers": [
+    {"name": "Thibaut Courtois", "team": "Real Madrid",    "matches_played": 13, "saves": 4.7, "goals_conceded": 1.1, "clean_sheets": 5},
+    {"name": "Alisson Becker",   "team": "Liverpool",      "matches_played": 13, "saves": 3.8, "goals_conceded": 1.1, "clean_sheets": 5},
+    {"name": "Ederson",          "team": "Manchester City","matches_played": 11, "saves": 2.9, "goals_conceded": 1.3, "clean_sheets": 4},
+    {"name": "Manuel Neuer",     "team": "Bayern Munich",  "matches_played": 9,  "saves": 3.1, "goals_conceded": 0.7, "clean_sheets": 4},
+    {"name": "Jan Oblak",        "team": "Atlético Madrid","matches_played": 10, "saves": 3.5, "goals_conceded": 1.0, "clean_sheets": 3},
+    {"name": "Wojciech Szczęsny","team": "Juventus",       "matches_played": 7,  "saves": 3.2, "goals_conceded": 1.4, "clean_sheets": 2},
+    {"name": "Marc-André ter Stegen","team":"Barcelona",   "matches_played": 10, "saves": 3.8, "goals_conceded": 1.5, "clean_sheets": 3},
+    {"name": "André Onana",      "team": "Ajax",           "matches_played": 8,  "saves": 3.0, "goals_conceded": 1.2, "clean_sheets": 2},
+    {"name": "Gregor Kobel",     "team": "Borussia Dortmund","matches_played": 9, "saves": 3.4, "goals_conceded": 1.3, "clean_sheets": 3},
+    {"name": "Yann Sommer",      "team": "Inter Milan",    "matches_played": 10, "saves": 2.8, "goals_conceded": 0.9, "clean_sheets": 4}
+  ],
+  "defenders": [
+    {"name": "Eder Militão",     "team": "Real Madrid",    "matches_played": 12, "balls_recovered": 6.3, "tackles": 2.1, "tackles_won": 1.6},
+    {"name": "Reinildo",         "team": "Atlético Madrid","matches_played": 5,  "balls_recovered": 7.6, "tackles": 1.3, "tackles_won": 0.6},
+    {"name": "Thiago Silva",     "team": "Chelsea",        "matches_played": 9,  "balls_recovered": 7.2, "tackles": 1.8, "tackles_won": 1.4},
+    {"name": "Virgil van Dijk",  "team": "Liverpool",      "matches_played": 13, "balls_recovered": 6.9, "tackles": 1.5, "tackles_won": 1.2},
+    {"name": "Ibrahima Konaté",  "team": "Liverpool",      "matches_played": 10, "balls_recovered": 6.6, "tackles": 2.3, "tackles_won": 1.8},
+    {"name": "João Cancelo",     "team": "Manchester City","matches_played": 11, "balls_recovered": 6.2, "tackles": 2.0, "tackles_won": 1.5},
+    {"name": "Fabinho",          "team": "Liverpool",      "matches_played": 10, "balls_recovered": 5.7, "tackles": 3.1, "tackles_won": 2.2},
+    {"name": "Rodri",            "team": "Manchester City","matches_played": 11, "balls_recovered": 5.2, "tackles": 3.4, "tackles_won": 2.5},
+    {"name": "Nicolás Otamendi", "team": "Benfica",        "matches_played": 9,  "balls_recovered": 7.0, "tackles": 1.9, "tackles_won": 1.4},
+    {"name": "Benjamin Pavard",  "team": "Bayern Munich",  "matches_played": 10, "balls_recovered": 5.5, "tackles": 2.2, "tackles_won": 1.7}
+  ]
+}

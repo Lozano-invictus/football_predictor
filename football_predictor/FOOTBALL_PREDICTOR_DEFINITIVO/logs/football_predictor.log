@@ -1,0 +1,67 @@
+2026-05-02 18:26:59,361 - utils - INFO - Iniciando Pipeline ETL Automatico...
+2026-05-02 18:26:59,362 - root - INFO - Saving cached data to C:\Users\ESTEBAN LOZANO\Downloads\football_predictor\FOOTBALL_PREDICTOR_DEFINITIVO\data\soccerdata_cache
+2026-05-02 18:31:53,366 - utils - INFO - 🚀 Iniciando Importación Maestra de Datos Históricos...
+2026-05-02 18:32:23,577 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:32:23,587 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-05-02 18:32:23,591 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-05-02 18:32:23,594 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-05-02 18:32:23,598 - utils - INFO - 🎉 Importación Maestra completada con éxito.
+2026-05-02 18:33:00,531 - utils - INFO - 🚀 Iniciando Importación Maestra de Datos Históricos...
+2026-05-02 18:33:00,537 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:33:00,545 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-05-02 18:33:00,550 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-05-02 18:33:00,555 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-05-02 18:33:00,559 - utils - INFO - 🎉 Importación Maestra completada con éxito.
+2026-05-02 18:33:05,393 - utils - INFO - 🚀 Iniciando Importación Maestra de Datos Históricos...
+2026-05-02 18:33:05,396 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:33:05,403 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-05-02 18:33:05,406 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-05-02 18:33:05,409 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-05-02 18:33:05,413 - utils - INFO - 🎉 Importación Maestra completada con éxito.
+2026-05-02 18:36:58,342 - utils - INFO - 🚀 Iniciando Ingesta Maestra de Datos UCL (2022-2026)...
+2026-05-02 18:36:58,353 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-05-02 18:36:58,370 - utils - ERROR - ❌ Error crítico en ETL Master Pro: (sqlite3.OperationalError) no such column: teams.short_name
+[SQL: SELECT teams.id AS teams_id, teams.name AS teams_name, teams.short_name AS teams_short_name, teams.country AS teams_country, teams.league AS teams_league, teams.logo_url AS teams_logo_url, teams.stadium AS teams_stadium, teams.coach AS teams_coach, teams.ucl_titles AS teams_ucl_titles 
+FROM teams 
+WHERE teams.name = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('AC Milan', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-03 19:25:25,907 - utils - INFO - 🚀 Iniciando Ingesta Maestra de Datos UCL Enterprise (2022-2026)...
+2026-06-03 19:25:25,935 - utils - ERROR - ❌ Error crítico en pipeline ETL: 'ETLMasterPro' object has no attribute '_import_master_data'
+2026-06-03 19:26:27,918 - utils - INFO - 🚀 Iniciando Ingesta Maestra de Datos UCL Enterprise (2022-2026)...
+2026-06-03 19:26:27,948 - utils - INFO - Cargando equipos maestros desde _MASTER...
+2026-06-03 19:26:28,038 - utils - INFO - Cargando historial de ganadores UCL desde _MASTER...
+2026-06-03 19:26:28,039 - utils - INFO - --- Procesando Temporada 2022-23 ---
+2026-06-03 19:26:28,181 - utils - INFO - --- Procesando Temporada 2023-24 ---
+2026-06-03 19:26:28,289 - utils - INFO - --- Procesando Temporada 2024-25 ---
+2026-06-03 19:26:28,427 - utils - INFO - --- Procesando Temporada 2025-26 ---
+2026-06-03 19:26:28,523 - utils - INFO - ✅ Datos de Semifinalistas 2025/26 integrados.
+2026-06-03 19:26:28,526 - utils - INFO - 🎉 Ingesta Maestra Enterprise completada con éxito.
+2026-06-12 18:12:47,326 - data.api_fetcher - INFO - FootballDataClient inicializado correctamente
+2026-06-12 18:12:47,331 - data.api_fetcher - INFO - Obteniendo equipos de Champions League (CL)...
+2026-06-12 18:12:47,333 - data.api_fetcher - DEBUG - Request #1 a: https://api.football-data.org/v4/competitions/CL/teams con params: {'season': 2025}
+2026-06-12 18:12:49,231 - data.api_fetcher - DEBUG - Response de https://api.football-data.org/v4/competitions/CL/teams: 400 en 1.90s
+2026-06-12 18:12:49,233 - data.api_fetcher - WARNING - Error HTTP 400 en https://api.football-data.org/v4/competitions/CL/teams: {"message":"Your API token is invalid.","errorCode":400}
+2026-06-12 18:12:49,234 - data.api_fetcher - WARNING - Error 400 Bad Request en https://api.football-data.org/v4/competitions/CL/teams — no reintentando
+2026-06-12 18:12:49,236 - data.api_fetcher - DEBUG - Respetando límite de tasa: esperando 6.10s
+2026-06-12 18:12:55,332 - data.api_fetcher - DEBUG - Request #1 a: https://api.football-data.org/v4/competitions/CL/matches con params: {'status': 'FINISHED', 'season': 2025}
+2026-06-12 18:12:55,609 - data.api_fetcher - DEBUG - Response de https://api.football-data.org/v4/competitions/CL/matches: 400 en 6.37s
+2026-06-12 18:12:55,610 - data.api_fetcher - WARNING - Error HTTP 400 en https://api.football-data.org/v4/competitions/CL/matches: {"message":"Your API token is invalid.","errorCode":400}
+2026-06-12 18:12:55,612 - data.api_fetcher - WARNING - Error 400 Bad Request en https://api.football-data.org/v4/competitions/CL/matches — no reintentando
+2026-06-12 18:12:55,613 - data.api_fetcher - INFO - ✅ Commit exitoso: 0 equipos actualizados en BD
+2026-06-12 18:12:55,617 - data.api_fetcher - DEBUG - Respetando límite de tasa: esperando 6.09s
+2026-06-12 18:13:01,711 - data.api_fetcher - DEBUG - Request #1 a: https://api.football-data.org/v4/competitions/CL/scorers con params: {'limit': 20, 'season': 2025}
+2026-06-12 18:13:01,966 - data.api_fetcher - DEBUG - Response de https://api.football-data.org/v4/competitions/CL/scorers: 400 en 6.35s
+2026-06-12 18:13:01,967 - data.api_fetcher - WARNING - Error HTTP 400 en https://api.football-data.org/v4/competitions/CL/scorers: {"message":"Your API token is invalid.","errorCode":400}
+2026-06-12 18:13:01,967 - data.api_fetcher - WARNING - Error 400 Bad Request en https://api.football-data.org/v4/competitions/CL/scorers — no reintentando
+2026-06-12 18:13:01,968 - data.api_fetcher - INFO - ✅ Commit exitoso: 0 goleadores actualizados en BD
+2026-06-12 20:06:39,469 - utils - WARNING - Equipo incompleto: Test FC
+2026-06-12 20:06:39,472 - utils - WARNING - Attack inválido para Test FC: 10.0
+2026-06-12 20:06:39,473 - utils - WARNING - Defense inválido para Test FC: 5.0
+2026-06-12 20:10:20,971 - utils - WARNING - Equipo incompleto: Test FC
+2026-06-12 20:10:20,973 - utils - WARNING - Attack inválido para Test FC: 10.0
+2026-06-12 20:10:20,975 - utils - WARNING - Defense inválido para Test FC: 5.0
+2026-06-19 16:44:20,140 - utils - WARNING - Equipo incompleto: Test FC
+2026-06-19 16:44:20,144 - utils - WARNING - Attack inválido para Test FC: 10.0
+2026-06-19 16:44:20,148 - utils - WARNING - Defense inválido para Test FC: 5.0

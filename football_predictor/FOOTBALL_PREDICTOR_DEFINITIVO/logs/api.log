@@ -1,0 +1,18 @@
+2026-06-12 18:12:47,326 [INFO] data.api_fetcher: FootballDataClient inicializado correctamente
+2026-06-12 18:12:47,331 [INFO] data.api_fetcher: Obteniendo equipos de Champions League (CL)...
+2026-06-12 18:12:47,333 [DEBUG] data.api_fetcher: Request #1 a: https://api.football-data.org/v4/competitions/CL/teams con params: {'season': 2025}
+2026-06-12 18:12:49,231 [DEBUG] data.api_fetcher: Response de https://api.football-data.org/v4/competitions/CL/teams: 400 en 1.90s
+2026-06-12 18:12:49,233 [WARNING] data.api_fetcher: Error HTTP 400 en https://api.football-data.org/v4/competitions/CL/teams: {"message":"Your API token is invalid.","errorCode":400}
+2026-06-12 18:12:49,234 [WARNING] data.api_fetcher: Error 400 Bad Request en https://api.football-data.org/v4/competitions/CL/teams — no reintentando
+2026-06-12 18:12:49,236 [DEBUG] data.api_fetcher: Respetando límite de tasa: esperando 6.10s
+2026-06-12 18:12:55,332 [DEBUG] data.api_fetcher: Request #1 a: https://api.football-data.org/v4/competitions/CL/matches con params: {'status': 'FINISHED', 'season': 2025}
+2026-06-12 18:12:55,609 [DEBUG] data.api_fetcher: Response de https://api.football-data.org/v4/competitions/CL/matches: 400 en 6.37s
+2026-06-12 18:12:55,610 [WARNING] data.api_fetcher: Error HTTP 400 en https://api.football-data.org/v4/competitions/CL/matches: {"message":"Your API token is invalid.","errorCode":400}
+2026-06-12 18:12:55,612 [WARNING] data.api_fetcher: Error 400 Bad Request en https://api.football-data.org/v4/competitions/CL/matches — no reintentando
+2026-06-12 18:12:55,613 [INFO] data.api_fetcher: ✅ Commit exitoso: 0 equipos actualizados en BD
+2026-06-12 18:12:55,617 [DEBUG] data.api_fetcher: Respetando límite de tasa: esperando 6.09s
+2026-06-12 18:13:01,711 [DEBUG] data.api_fetcher: Request #1 a: https://api.football-data.org/v4/competitions/CL/scorers con params: {'limit': 20, 'season': 2025}
+2026-06-12 18:13:01,966 [DEBUG] data.api_fetcher: Response de https://api.football-data.org/v4/competitions/CL/scorers: 400 en 6.35s
+2026-06-12 18:13:01,967 [WARNING] data.api_fetcher: Error HTTP 400 en https://api.football-data.org/v4/competitions/CL/scorers: {"message":"Your API token is invalid.","errorCode":400}
+2026-06-12 18:13:01,967 [WARNING] data.api_fetcher: Error 400 Bad Request en https://api.football-data.org/v4/competitions/CL/scorers — no reintentando
+2026-06-12 18:13:01,968 [INFO] data.api_fetcher: ✅ Commit exitoso: 0 goleadores actualizados en BD
